@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Jevil Final Fight</title>
+  <title>Jevil Fight - TRUE CHAOS</title>
   <style>
     body {
       font-family: 'Courier New', monospace;
@@ -20,11 +20,13 @@
 
     .battlefield {
       position: relative;
-      width: 600px;
-      height: 400px;
+      width: 640px;
+      height: 480px;
       margin: 0 auto 20px;
-      border: 2px solid white;
-      background-color: #111;
+      background-image: url('https://i.imgur.com/4y2A5GK.png');
+      background-size: cover;
+      border: 8px solid #550088;
+      border-radius: 12px;
       overflow: hidden;
     }
 
@@ -32,30 +34,33 @@
       position: absolute;
       width: 80px;
       transition: top 0.3s, left 0.3s;
+      z-index: 2;
     }
 
     #soul {
       position: absolute;
       width: 20px;
       height: 20px;
-      background-color: red;
-      border-radius: 50%;
-      z-index: 2;
+      background: none;
+      background-image: url('https://i.imgur.com/vn0UHyN.png'); /* red heart sprite */
+      background-size: cover;
+      z-index: 3;
     }
 
     .bullet {
       position: absolute;
-      width: 10px;
-      height: 10px;
-      background-color: yellow;
-      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      background-image: url('https://i.imgur.com/nvMQTYY.gif'); /* spinning Jevil star */
+      background-size: contain;
+      background-repeat: no-repeat;
       z-index: 1;
     }
 
     button {
       padding: 10px 20px;
       font-size: 18px;
-      background-color: purple;
+      background-color: #aa00ff;
       color: white;
       border: none;
       border-radius: 10px;
@@ -76,12 +81,13 @@
   </style>
 </head>
 <body>
+  <!-- MUSIC -->
   <audio id="music" src="https://vgmsite.com/soundtracks/deltarune-ost/lpqlxdedwn/36.%20THE%20WORLD%20REVOLVING.mp3" autoplay loop></audio>
 
   <div class="game-container">
-    <h1>💥 Final Jevil Fight</h1>
+    <h1>🎭 Jevil Fight - TRUE CHAOS MODE</h1>
     <div class="battlefield" id="battlefield">
-      <img src="https://static.wikia.nocookie.net/deltarune/images/f/f6/Jevil_Battle.gif" id="jevil" />
+      <img src="https://i.imgur.com/N4aF2T4.gif" id="jevil" />
       <div id="soul"></div>
     </div>
 
@@ -106,7 +112,7 @@
     const attackBtn = document.getElementById('attackBtn');
     const log = document.getElementById('log');
 
-    let soulX = 300, soulY = 200;
+    let soulX = 320, soulY = 240;
     const soulSpeed = 5;
     let keys = {};
     let playerHP = 100;
@@ -158,7 +164,7 @@
         bullet.style.left = `${x}px`;
         bullet.style.top = `${y}px`;
 
-        if (x < -10 || x > battlefield.clientWidth + 10 || y < -10 || y > battlefield.clientHeight + 10) {
+        if (x < -24 || x > battlefield.clientWidth + 24 || y < -24 || y > battlefield.clientHeight + 24) {
           clearInterval(interval);
           bullet.remove();
         }
@@ -180,7 +186,7 @@
       document.getElementById('player-hp').textContent = playerHP;
       log.textContent = `💥 Jevil hit you! (-${amount} HP)`;
       if (playerHP <= 0) {
-        log.textContent = "💀 You lost to Jevil. Chaos reigns.";
+        log.textContent = "💀 You lost to Jevil. CHAOS CHAOS.";
         clearInterval(gameLoop);
         clearInterval(bulletSpawner);
         attackBtn.disabled = true;
@@ -196,7 +202,7 @@
       log.textContent = `🗡️ You attacked Jevil! (-${dmg} HP)`;
 
       if (jevilHP <= 0) {
-        log.textContent = "✨ You defeated Jevil! Peace returns.";
+        log.textContent = "✨ You defeated Jevil! CHAOS... ends?";
         clearInterval(gameLoop);
         clearInterval(bulletSpawner);
         attackBtn.disabled = true;
@@ -207,10 +213,10 @@
       // Phases
       if (jevilHP < 70 && bulletSpeed === 2) {
         bulletSpeed = 3;
-        log.textContent += " 😈 Jevil is getting serious!";
+        log.textContent += " 😈 Jevil is LAUGHING WILDLY!";
       } else if (jevilHP < 40 && bulletSpeed === 3) {
         bulletSpeed = 4;
-        log.textContent += " 🔥 Final chaos phase!";
+        log.textContent += " 🔥 Jevil is UNLEASHING TRUE CHAOS!";
       }
     }
 
@@ -227,4 +233,3 @@
   </script>
 </body>
 </html>
-
